@@ -1,10 +1,10 @@
 //
-// ktBOX2
+// ktBOX2s
 //
 //
 
 A = 1;
-B = 1;
+B = 0;
 
 
 
@@ -36,8 +36,12 @@ difference()
         cube( [panel_thick, 43, 13.5] );
         translate( [140.5, -1.5, -1.5] )
         cube( [panel_thick, 43, 13.5] );
-        translate( [109, -1.5, 0] )
-        cube( [panel_thick, 43, 12] );
+        //translate( [109, -1.5+12.8, 0] )
+        //cube( [panel_thick, 43-12.8*2, 12] );
+        //for(i =[0:7]){
+        //    translate( [110-2.54*5*i, 19, 0] )
+        //    cube( [panel_thick*2, 4, 12] );
+        //}
         
         //side
         translate( [-1.5, -1.5, 0] )
@@ -46,8 +50,8 @@ difference()
         cube( [9.27, 43, 12] );
 
         //inter
-        translate( [-1.5+9.27, 2.22+2.54*7+2.54/2-(20+1)/2-panel_thick, 0+1] )
-        cube( [109+1.5-9.27, panel_thick, 12-1] );
+        //translate( [-1.5+9.27, 2.22+2.54*7+2.54/2-(20+1)/2-panel_thick, 0+1] )
+        //cube( [109+1.5-9.27, panel_thick, 12-1] );
         translate( [114.45, -1.5, 0] )
         cube( [3.55, 8, 12] );
     }
@@ -76,21 +80,14 @@ difference()
     
     //relay
     translate( [8.5-1.5+6+6/2, 2.22+2.54*7+2.54/2, 12] ){
-        cube( [5+0.5, 20+0.5, 3], center=true );
-        translate( [2.54*5*1, 0, 0] )
-        cube( [5+0.5, 20+0.5, 3], center=true );
-        translate( [2.54*5*2, 0, 0] )
-        cube( [5+0.5, 20+0.5, 3], center=true );
-        translate( [2.54*5*3, 0, 0] )
-        cube( [5+0.5, 20+0.5, 3], center=true );
-        translate( [2.54*5*4, 0, 0] )
-        cube( [5+0.5, 20+0.5, 3], center=true );
-        translate( [2.54*5*5, 0, 0] )
-        cube( [5+0.5, 20+0.5, 3], center=true );
-        translate( [2.54*5*6, 0, 0] )
-        cube( [5+0.5, 20+0.5, 3], center=true );
-        translate( [2.54*5*7, 0, 0] )
-        cube( [5+0.5, 20+0.5, 3], center=true );
+        relay_hole( 2.54*5*0, 0 );
+        relay_hole( 2.54*5*1, 0 );
+        relay_hole( 2.54*5*2, 0 );
+        relay_hole( 2.54*5*3, 0 );
+        relay_hole( 2.54*5*4, 0 );
+        relay_hole( 2.54*5*5, 0 );
+        relay_hole( 2.54*5*6, 0 );
+        relay_hole( 2.54*5*7, 0 );
     }
 }
 }
@@ -165,5 +162,23 @@ module rear_screw_hole( x, y, z=0 )
         cylinder( 0.8+gap2, 1.5+0.7, 1.5, $fn=30 );
         translate( [0, 0, -gap1] )
         cylinder( 2.2+gap1, 3.25+0.4, 3.25-0.6, $fn=30 );
+    }
+}
+
+
+
+module relay_hole( x, y, z=0 )
+{
+    translate( [x, y, z] )
+    {
+        cube( [5+0.5, 20+0.5, 3], center=true );
+        translate( [-3, (20/2+7/2)+0.5/2, 0] ){
+            cube( [5, 7+0.5, 3], center=true );
+            cube( [8, 4, 3], center=true );
+        }
+        translate( [1, -20/2-5/2, 0] ){
+            cube( [7, 5, 3], center=true );
+            cube( [10, 3, 3], center=true );
+        }
     }
 }
